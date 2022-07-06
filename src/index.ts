@@ -37,7 +37,7 @@ try {
         if (code.toUpperCase() == HASH.toUpperCase()) doorOpen()
     });
 }
-catch (e: any) {
+catch (e) {
     console.error("not found qr reader")
 }
 
