@@ -35,7 +35,7 @@ catch (e) {
 }
 
 //http://192.168.1.168/index.html?p0=3000
-app.get("/index.html", (req: Request, res: Response, next: NextFunction) => {
+app.get("/*", (req: Request, res: Response, next: NextFunction) => {
     console.log(req.query.p0)
     if (req.query.p0 != undefined && req.query.p0) {
         const pulse: number = Number(req.query.p0)
@@ -48,7 +48,11 @@ app.get("/index.html", (req: Request, res: Response, next: NextFunction) => {
             }, pulse)
         }
     }
-    res.send({})
+    var door_state_old: string = "y_on"
+    if (door_open_state0) door_state_old = "y_off"
+    if (!door_open_state0) door_state_old = "y_on"
+
+    res.send({ door_open_state0: door_open_state0, door_state_old })
 })
 
 
