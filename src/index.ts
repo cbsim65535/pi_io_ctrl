@@ -39,12 +39,15 @@ app.get("/index.html", (req: Request, res: Response, next: NextFunction) => {
     if (req.query.p0 != undefined && req.query.p0) {
         const pulse: number = Number(req.query.p0)
         if (pulse > 0 && relay0) {
+            console.debug("open")
             relay0.digitalWrite(0)
             setTimeout(function() {
+                console.debug("close")
                 relay0.digitalWrite(1)
             }, pulse)
         }
     }
+    res.send({})
 })
 
 
