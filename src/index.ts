@@ -1,6 +1,15 @@
 var usbScanner = require('./usbscanner').usbScanner;
 var getDevices = require('./usbscanner').getDevices;
 
+import express, { Request, Response, NextFunction } from 'express'
+
+const app = express()
+
+//http://192.168.1.168/index.html?p0=3000
+app.get("/index.html", (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.querry)
+})
+
 const Gpio = require('pigpio').Gpio;
 
 const relay0 = new Gpio(5, { mode: Gpio.OUTPUT });
@@ -47,3 +56,6 @@ function doorOpen() {
 
 }
 
+express.listen(80, () => {
+    console.info("server inited.")
+})
