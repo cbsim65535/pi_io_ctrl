@@ -4,7 +4,7 @@ var getDevices = require('./usbscanner').getDevices;
 const Gpio = require('pigpio').Gpio;
 
 const relay0 = new Gpio(5, { mode: Gpio.OUTPUT });
-relay0.digitalWrite(0)
+relay0.digitalWrite(1)
 
 const dry0 = new Gpio(6, {
     mode: Gpio.INPUT,
