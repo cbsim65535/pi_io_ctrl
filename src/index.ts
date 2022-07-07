@@ -31,6 +31,7 @@ try {
 }
 catch (e) {
     console.warn("not pi.")
+    console.warn(e)
 }
 
 //http://192.168.1.168/index.html?p0=3000
