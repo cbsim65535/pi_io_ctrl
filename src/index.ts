@@ -36,6 +36,7 @@ catch (e) {
 
 //http://192.168.1.168/index.html?p0=3000
 app.get("/*", (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.url)
     console.log(req.path)
     console.log(req.query.p0)
     if (req.query.p0 != undefined && req.query.p0) {
