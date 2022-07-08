@@ -55,7 +55,7 @@ app.get("/*", (req: Request, res: Response, next: NextFunction) => {
     if (!door_open_state0) door_state_old = "y_on"
 
     // res.setHeader('content-type', 'text/plain')
-    res.end(JSON.stringify({ door_open_state0: door_open_state0, door_state_old }))
+    res.end(`<html><body>door_open_state0: ${door_open_state0}, door_state_old: ${door_state_old}</body></html>`)
 })
 
 
