@@ -54,7 +54,7 @@ app.get("/*", (req: Request, res: Response, next: NextFunction) => {
     if (door_open_state0) door_state_old = "y_off"
     if (!door_open_state0) door_state_old = "y_on"
 
-    res.send({ door_open_state0: door_open_state0, door_state_old })
+    res.json({ door_open_state0: door_open_state0, door_state_old })
 })
 
 
