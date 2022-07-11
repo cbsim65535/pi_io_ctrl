@@ -41,14 +41,7 @@ app.get("/*", (req: Request, res: Response, next: NextFunction) => {
     console.log(req.query.p0)
     if (req.query.p0 != undefined && req.query.p0) {
         const pulse: number = Number(req.query.p0)
-        if (pulse > 0 && relay0) {
-            console.debug("open")
-            relay0.digitalWrite(0)
-            setTimeout(function() {
-                console.debug("close")
-                relay0.digitalWrite(1)
-            }, pulse)
-        }
+        doorOpen(pulse)
     }
     var door_state_old: string = "y_on"
     if (door_open_state0) door_state_old = "y_off"
@@ -71,17 +64,23 @@ try {
     //scanner emits a data event once a barcode has been read and parsed
     scanner.on("data", function(code: string) {
         console.debug("recieved code : " + code);
-        if (code.toUpperCase() == HASH.toUpperCase()) doorOpen()
+        if (code.toUpperCase() == HASH.toUpperCase()) doorOpen(3000)
     });
 }
 catch (e) {
     console.error("not found qr reader")
 }
 
-function doorOpen() {
+function doorOpen(pulse_ms: number) {
     console.debug("DOOR OPEN")
-    axios.get(`http://192.168.0.223?p0=3000`)
-
+    if (pulse_ms > 0 && relay0) {
+        console.debug("open", pulse_ms)
+        relay0.digitalWrite(0)
+        setTimeout(function() {
+            console.debug("close")
+            relay0.digitalWrite(1)
+        }, pulse_ms)
+    }
 }
 
 app.listen(80, () => {
